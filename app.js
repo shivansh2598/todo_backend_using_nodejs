@@ -6,7 +6,7 @@ const mongoose=require('mongoose');
 // const logger=require('morgan');
 const config=require('./helpers/config')
 const routepath=require('./routes/routes')
-
+const path = require('path');
 
 
 //MongoDb Connections
@@ -36,7 +36,12 @@ mongoose.connection.on('disconnected', function() {
 app.use(cors());
 app.use(bodyParser());
 app.use(bodyParser.urlencoded({ extended:false }))
-app.use('/',routepath);
 
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+app.use('/',routepath);
 
 app.listen(config.port);

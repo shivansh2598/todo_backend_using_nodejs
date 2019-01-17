@@ -3,7 +3,7 @@ const router = express.Router();
 const user=require('../models/schemas')
 var swig  = require('swig');
 
-router.get("/",(req,res)=>{
+router.get("/hey",(req,res)=>{
    user.find((err,docs)=>{
     if(err)
     {
