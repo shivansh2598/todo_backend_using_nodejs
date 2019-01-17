@@ -6,6 +6,8 @@ const mongoose=require('mongoose');
 // const logger=require('morgan');
 const config=require('./helpers/config')
 const routepath=require('./routes/routes')
+
+//for server side static rendering
 const path = require('path');
 
 
@@ -37,11 +39,13 @@ app.use(cors());
 app.use(bodyParser());
 app.use(bodyParser.urlencoded({ extended:false }))
 
+//for server side static rendering
 app.use(express.static(path.join(__dirname, 'build')));
-
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
+
+
 app.use('/',routepath);
 
 app.listen(config.port);
